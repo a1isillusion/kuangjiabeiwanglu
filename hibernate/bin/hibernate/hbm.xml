@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+ <class name="hibernate.user" table="t_user">
+ <id name="uid" column="uid">
+ <generator class="increment"></generator>
+ </id>
+ <property name="username" column="username"></property>
+ <property name="password" column="password"></property>
+ <set name="setrole" table="user_role" cascade="save-update">
+ <key column="userid"></key>
+<many-to-many class="hibernate.role" column="roleid"></many-to-many>
+ </set>
+ </class>
+ <class name="hibernate.role" table="t_role">
+ <id name="id" column="id">
+ <generator class="increment"></generator>
+ </id>
+ <property name="name" column="name"></property>
+ <property name="memo" column="memo"></property>
+ <set name="setuser" table="user_role">
+ <key column="roleid"></key>
+<many-to-many class="hibernate.role" column="userid"></many-to-many>
+ </set>
+
+ </class>
+ </hibernate-mapping>
